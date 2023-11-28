@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar pelicula</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <!-- Contenido de update.html -->
+    <div class="form-container">
+        <!-- Formulario de actualización -->
+        <form action="/update/{{pelicula.id}}" method="post" class="update-form">
+            <input type="text" name="titulo" class="form-input" placeholder="introduce el titulo" value="{{pelicula.titulo}}">
+            <input type="text" name="director" class="form-input" placeholder="introduce el director" value="{{pelicula.director}}">
+            <input type="text" name="genero" class="form-input" placeholder="introduce el genero" value="{{pelicula.genero}}">
+            <input type="text" name="lanzamiento" class="form-input" placeholder="año de lanzamiento" value="{{pelicula.lanzamiento}}">
+            <input type="text" name="duracion" class="form-input" placeholder="duracion en minutos" value="{{pelicula.duracion}}">
+            <textarea name="sinopsis" class="form-textarea" placeholder="trama de la pelicula">{{pelicula.sinopsis}}</textarea>
+
+            <button class="form-button">Guardar</button>
+        </form>
+    </div>
+
+</body>
+</html>
