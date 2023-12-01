@@ -23,6 +23,7 @@
 <div class="movie-container">
     {% for pelicula in peliculas %}
         <div class="movie-card">
+            <img src="{{ pelicula.imagen }}" alt="{{ pelicula.titulo }}" style="width: 100px; height: 150px;">
             <h5>{{pelicula.titulo}}</h5>
             <p>{{pelicula.director}}</p>
             <p>{{pelicula.genero}}</p>

@@ -13,7 +13,7 @@ if os.environ.get('DATABASE.URI'):
     app.config['SQLALCHEMY_DATABASE_URI_CLOUD'] = os.environ.get('DATABASE_URI')
 else:    
     #bd local
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:12345@localhost/peliculasdb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 

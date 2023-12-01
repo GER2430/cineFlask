@@ -8,14 +8,14 @@ class Pelicula(db.Model):
     lanzamiento = db.Column(db.Integer, nullable = False)
     duracion = db.Column(db.String(256), nullable = False)
     sinopsis = db.Column(db.Text, nullable = False)
-    #imagen = db.Column(db.String(256), nullable = True)
+    imagen = db.Column(db.String(256), nullable = True)
 
     def __init__(self, titulo, director, genero, 
-                 lanzamiento, duracion, sinopsis):
+                 lanzamiento, duracion, sinopsis, imagen):
         self.titulo = titulo
         self.director = director
         self.genero = genero
         self.lanzamiento = lanzamiento
         self.duracion = duracion
         self.sinopsis = sinopsis
-        #self.imagen = imagen
+        self.imagen = imagen

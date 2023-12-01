@@ -26,16 +26,16 @@ def add_movie():
         lanzamiento = request.form['lanzamiento']
         duracion = request.form['duracion']
         sinopsis = request.form['sinopsis']
-        #imagen = request.files['imagen']
-        #if imagen:
+        imagen = request.files['imagen']
+        if imagen:
             # Asegurarse de que el nombre del archivo sea seguro
-            #filename = secure_filename(imagen.filename)
+            filename = secure_filename(imagen.filename)
             # Guardar la imagen en una ubicación específica (por ejemplo, carpeta "uploads" en el directorio estático)
-            #ruta_imagen = os.path.join('static/images', filename)
-            #imagen.save(ruta_imagen)
+            ruta_imagen = os.path.join('static/images', filename)
+            imagen.save(ruta_imagen)
         
         new_pelicula = Pelicula(titulo, director, genero,
-                 lanzamiento, duracion, sinopsis)
+                 lanzamiento, duracion, sinopsis, ruta_imagen)
         
         db.session.add(new_pelicula)
         db.session.commit()
@@ -43,8 +43,8 @@ def add_movie():
         flash("pelicula añadida satisfactoriamente")
 
         return redirect(url_for('peliculas.index'))
-     #else:
-        #return "Invalid request method"
+     else:
+        return "Invalid request method"
 
 @peliculas.route("/delete/<id>")
 def delete_movie(id):

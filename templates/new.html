@@ -8,9 +8,7 @@
 </head>
 <body>
 
-    <!-- Contenido de new.html o update.html -->
     <div class="form-container">
-        <!-- Formulario de nueva película -->
         <form action="/add" method="post" enctype="multipart/form-data">
             <input type="text" name="titulo" class="form-input" placeholder="introduce el titulo" required>
             <input type="text" name="director" class="form-input" placeholder="introduce el director" required>
@@ -18,6 +16,7 @@
             <input type="text" name="lanzamiento" class="form-input" placeholder="año de lanzamiento" required>
             <input type="text" name="duracion" class="form-input" placeholder="duracion en minutos" required>
             <textarea name="sinopsis" class="form-textarea" placeholder="trama de la pelicula" required></textarea>
+            <input type="file" name="imagen" accept="image/*" class="form-input" required>
             <button class="form-button">save</button>
         </form>
     </div>
