@@ -2,6 +2,7 @@ from flask import Flask
 from routes.peliculas import peliculas
 from flask_sqlalchemy import SQLAlchemy
 from utils.db import db
+from flask_login import LoginManager, UserMixin
 import os
 
 app = Flask(__name__)
@@ -16,9 +17,6 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
-
-
-
 
 app.register_blueprint(peliculas)
 

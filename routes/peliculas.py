@@ -1,23 +1,29 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_required, current_user
+from models.usuario import Usuario
 from models.pelicula import Pelicula
 from utils.db import db
 from werkzeug.utils import secure_filename
 import os
 
-
-
 peliculas = Blueprint('peliculas', __name__)
 
 @peliculas.route("/")
+@login_required
 def index():
-    peliculas = Pelicula.query.all()
-    return render_template('index.html', peliculas=peliculas)
+    if not current_user.is_active:
+        return redirect(url_for ('login'))
+    else:
+        peliculas = Pelicula.query.all()
+        return render_template('index.html', peliculas=peliculas)
 
 @peliculas.route("/new", methods=['GET'])
+@login_required
 def new_movie_page():
     return render_template('new.html')
 
 @peliculas.route("/add", methods=['post'])
+@login_required
 def add_movie():
      if request.method == 'POST':
         titulo = request.form['titulo']
@@ -47,6 +53,7 @@ def add_movie():
         return "Invalid request method"
 
 @peliculas.route("/delete/<id>")
+@login_required
 def delete_movie(id):
     pelicula = Pelicula.query.get(id)
     db.session.delete(pelicula)
@@ -56,6 +63,7 @@ def delete_movie(id):
     return redirect(url_for('peliculas.index'))
 
 @peliculas.route("/update/<id>", methods = ['POST', 'GET'])
+@login_required
 def update_movie(id):
     pelicula = Pelicula.query.get(id)
 
@@ -73,3 +81,11 @@ def update_movie(id):
         return redirect(url_for("peliculas.index"))
     
     return render_template('update.html', pelicula=pelicula)
+
+@peliculas.route("/login", methods = ['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['nombre']
+        password = request.form['password_hash']
+
+        user = Usuario.query.filter_by(username=nombre).first()
