@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    <h1>Iniciar Sesión</h1>
+    <form action="/login" method="POST">
+        <input type="text" id="username" name="username" placeholder="nombre de usuario">
+        <input type="password" id="password" name="password" placeholder="contraseña">
+        <button type="submit">Ingresar</button>
+    </form>
+    <a href="{{ url_for('peliculas.registro') }}" >resgistrese, viejo/a verga</a>
+</body>
+</html>

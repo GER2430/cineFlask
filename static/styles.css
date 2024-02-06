@@ -1,10 +1,8 @@
-/* Estilos generales */
 body {
     font-family: 'Arial', sans-serif;
     background: #ccc;
 }
 
-/* Estilos para la página index.html */
 #index-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -22,7 +20,6 @@ body {
     
 }
 
-/* Estilos para la página new.html y update.html */
 .form-container {
     max-width: 400px;
     margin: 0 auto;
@@ -49,7 +46,6 @@ body {
     cursor: pointer;
 }
 
-/* Estilos para mensajes */
 .flash-messages {
     margin-bottom: 10px;
     padding: 10px;

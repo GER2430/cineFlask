@@ -9,7 +9,7 @@
 <body>
 
     <div class="form-container">
-        <form action="/update/{{pelicula.id}}" method="post" class="update-form">
+        <form action="/update/{{pelicula.id}}" method="post" class="update-form" enctype="multipart/form-data">
             <input type="text" name="titulo" class="form-input" placeholder="introduce el titulo" value="{{pelicula.titulo}}">
             <input type="text" name="director" class="form-input" placeholder="introduce el director" value="{{pelicula.director}}">
             <input type="text" name="genero" class="form-input" placeholder="introduce el genero" value="{{pelicula.genero}}">

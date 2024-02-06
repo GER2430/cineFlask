@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, login_user, logout_user
 from models.usuario import Usuario
 from models.pelicula import Pelicula
 from utils.db import db
@@ -9,10 +9,9 @@ import os
 peliculas = Blueprint('peliculas', __name__)
 
 @peliculas.route("/")
-@login_required
 def index():
     if not current_user.is_active:
-        return redirect(url_for ('login'))
+        return redirect(url_for ('peliculas.login'))
     else:
         peliculas = Pelicula.query.all()
         return render_template('index.html', peliculas=peliculas)
@@ -82,10 +81,40 @@ def update_movie(id):
     
     return render_template('update.html', pelicula=pelicula)
 
+@peliculas.route("/register", methods = ['GET', 'POST'])
+def registro():
+    if request.method == "GET":
+        return render_template("registro.html")
+    elif request.method == "POST":
+        nombre = request.form["nombre"]
+        username = request.form["username"]
+        password = request.form["password"]
+
+        usuario = Usuario(nombre, username, password)
+        db.session.add(usuario)
+        db.session.commit()
+
+        login_user(usuario)
+
+        return redirect(url_for('peliculas.index'))
+
 @peliculas.route("/login", methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['nombre']
-        password = request.form['password_hash']
+        username = request.form['username']
+        password = request.form['password']
 
-        user = Usuario.query.filter_by(username=nombre).first()
+        user = Usuario.query.filter_by(username=username).first()
+
+        if user and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('peliculas.index'))
+        else:
+            return redirect(url_for('peliculas.login'))
+    return render_template('login.html')
+
+
+@peliculas.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('peliculas.index'))
